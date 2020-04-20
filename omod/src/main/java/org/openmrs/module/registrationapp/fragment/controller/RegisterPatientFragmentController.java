@@ -16,6 +16,7 @@ import org.openmrs.PatientIdentifierType;
 import org.openmrs.Person;
 import org.openmrs.PersonAddress;
 import org.openmrs.PersonAttribute;
+import org.openmrs.PersonAttributeType;
 import org.openmrs.PersonName;
 import org.openmrs.Relationship;
 import org.openmrs.RelationshipType;
@@ -133,6 +134,7 @@ public class RegisterPatientFragmentController {
 
         patient.addName(name);
         patient.addAddress(address);
+        setEnterpriseAttribute(patient);
 
         // handle birthdate estimate, if no birthdate but estimate present
         if (patient.getBirthdate() == null && (birthdateYears != null || birthdateMonths != null)) {
@@ -457,5 +459,23 @@ public class RegisterPatientFragmentController {
         }
 
         return relationships;
+    }
+
+    /**
+     * Set the enterprise attribute on the person
+     * @param person
+     */
+    public void setEnterpriseAttribute (Person person) {
+        if( Context.getAuthenticatedUser() != null
+                && Context.getAuthenticatedUser().getPerson() != null
+                && Context.getAuthenticatedUser().getPerson().getAttribute("Enterprise") != null) {
+            String enterpriseValue = Context.getAuthenticatedUser().getPerson().getAttribute("Enterprise").getValue();
+            if(StringUtils.isNotBlank(enterpriseValue)) {
+                PersonAttributeType personAttributeByName = Context.getPersonService()
+                        .getPersonAttributeTypeByName("Enterprise");
+                PersonAttribute attribute = new PersonAttribute(personAttributeByName, enterpriseValue);
+                person.addAttribute(attribute);
+            }
+        }
     }
 }
