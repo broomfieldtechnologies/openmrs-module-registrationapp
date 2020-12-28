@@ -1,5 +1,9 @@
 package org.openmrs.module.registrationapp.page.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,9 +43,6 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 public class EditSectionPageController {
 
@@ -146,7 +147,7 @@ public class EditSectionPageController {
             try {
                 //The person address changes get saved along as with the call to save patient
                 patientService.savePatient(patient);
-                if (sectionId.equals("contactInfo")) {
+				if (sectionId.equals("contactInfo") || sectionId.equals("personalInfo")) {
                     InfoErrorMessageUtil.flashInfoMessage(request.getSession(),
                             ui.message("registrationapp.editContactInfoMessage.success", patient.getPersonName() != null ? ui.encodeHtml(patient.getPersonName().toString()) : ""));
                 }
