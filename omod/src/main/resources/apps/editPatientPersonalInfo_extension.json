@@ -1,0 +1,9 @@
+[
+    {
+        "id": "${project.parent.groupId}.${project.parent.artifactId}.editPatientPersonalInfo",
+        "extensionPointId": "patientHeader.editPatientPersonalInfo",
+        "type": "link",
+        "label": "general.edit",
+        "url": "registrationapp/editSection.page?patientId={{patient.patientId}}&sectionId=personalInfo&appId=referenceapplication.registrationapp.registerPatient"
+    }
+]
