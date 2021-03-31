@@ -1,0 +1,9 @@
+[
+    {
+        "id": "${project.parent.groupId}.${project.parent.artifactId}.editPatientVaccineInfo",
+        "extensionPointId": "patientHeader.editPatientVaccineInfo",
+        "type": "link",
+        "label": "general.edit",
+        "url": "registrationapp/editSection.page?patientId={{patient.patientId}}&sectionId=vaccineInfo&appId=referenceapplication.registrationapp.registerPatient"
+    }
+]

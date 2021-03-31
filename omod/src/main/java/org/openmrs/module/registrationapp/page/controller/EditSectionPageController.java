@@ -147,7 +147,7 @@ public class EditSectionPageController {
             try {
                 //The person address changes get saved along as with the call to save patient
                 patientService.savePatient(patient);
-				if (sectionId.equals("contactInfo") || sectionId.equals("personalInfo")) {
+				if (sectionId.equals("contactInfo") || sectionId.equals("personalInfo") || sectionId.equals("vaccineInfo")) {
                     InfoErrorMessageUtil.flashInfoMessage(request.getSession(),
                             ui.message("registrationapp.editContactInfoMessage.success", patient.getPersonName() != null ? ui.encodeHtml(patient.getPersonName().toString()) : ""));
                 }
